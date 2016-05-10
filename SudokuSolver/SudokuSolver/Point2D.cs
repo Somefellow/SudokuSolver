@@ -11,6 +11,12 @@ namespace SudokuSolver
         private int fX;
         private int fY;
 
+        public Point2D(int aIndex)
+        {
+            fX = aIndex % 9;
+            fY = aIndex / 9;
+        }
+
         public Point2D(int aX, int aY)
         {
             fX = aX;

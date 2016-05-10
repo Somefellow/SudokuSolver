@@ -10,17 +10,28 @@ namespace SudokuSolver
     {
         static void Main(string[] args)
         {
-            var lDictionary = new Dictionary<Point2D, int>();
-            lDictionary.Add(new Point2D(0, 0), 3);
-            lDictionary.Add(new Point2D(1, 0), 4);
-            lDictionary.Add(new Point2D(1, 1), 1);
-            lDictionary.Add(new Point2D(3, 1), 3);
-            lDictionary.Add(new Point2D(0, 2), 1);
-            lDictionary.Add(new Point2D(2, 2), 2);
-            lDictionary.Add(new Point2D(3, 3), 1);
+            string lInput =
+                "020178030" +
+                "040302090" +
+                "100000006" +
+                "008603500" +
+                "300000004" +
+                "006709200" +
+                "900000002" +
+                "080901060" +
+                "010436050";
 
-            Sudoku lSudoku = new Sudoku(2, lDictionary);
-            lSudoku.Draw();
+            Backtrack lBT = new Backtrack(new Sudoku(lInput));
+            new Sudoku(lInput).Draw();
+            Sudoku lSudoku = lBT.Solve();
+            if (lSudoku == null)
+            {
+                Console.WriteLine("Did not find a solution...");
+            }
+            else
+            {
+                lSudoku.Draw();
+            }
             Console.ReadKey();
         }
     }
