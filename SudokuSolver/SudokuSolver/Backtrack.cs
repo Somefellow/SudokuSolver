@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace SudokuSolver
 {
     class Backtrack
     {
-        private Queue<Sudoku> fQueue;
+        private Stack<Sudoku> fStack;
 
         public Backtrack(Sudoku lInitial)
         {
-            fQueue = new Queue<Sudoku>();
-            fQueue.Enqueue(lInitial);
+            fStack = new Stack<Sudoku>();
+            fStack.Push(lInitial);
         }
 
         public Sudoku Solve()
         {
             do
             {
-                Sudoku lSudoku = fQueue.Dequeue();
+                Sudoku lSudoku = fStack.Pop();
 
                 if (lSudoku.Solved())
                 {
@@ -43,10 +39,10 @@ namespace SudokuSolver
                     {
                         Sudoku lMoveSudoku = new Sudoku(lSudoku);
                         lMoveSudoku.SetValue(lBlankIndex, i);
-                        fQueue.Enqueue(lMoveSudoku);
+                        fStack.Push(lMoveSudoku);
                     }
                 }
-            } while (fQueue.Count > 0);
+            } while (fStack.Count > 0);
 
             return null;
         }

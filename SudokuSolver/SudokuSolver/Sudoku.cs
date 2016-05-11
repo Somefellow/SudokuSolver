@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SudokuSolver
 {
@@ -45,11 +42,6 @@ namespace SudokuSolver
             }
         }
 
-        //public int ValueAt(Point2D aPoint)
-        //{
-        //    return fGrid[(aPoint.Y * 9) + aPoint.X];
-        //}
-
         public int ValueAt(int aIndex)
         {
             return fGrid[aIndex];
@@ -57,108 +49,63 @@ namespace SudokuSolver
 
         public void SetValue(int aIndex, int aValue)
         {
-            Console.WriteLine("Writing in {0} at {1}", aValue, aIndex);
             fGrid[aIndex] = aValue;
         }
 
-        //public void SetValue(Point2D aPoint, int aValue)
-        //{
-        //    fGrid[(aPoint.Y * 9) + aPoint.X] = aValue;
-        //}
-
         public bool CanSetValue(int aIndex, int aValue)
         {
-            Point2D lPoint = new Point2D(aIndex);
-
-            if (!CheckRow(lPoint, aValue)) return false;
-            if (!CheckColumn(lPoint, aValue)) return false;
-            if (!CheckSubGrid(lPoint, aValue)) return false;
-
-            return true;
+            if (!CheckRow(aIndex, aValue)) return false;
+            else if (!CheckColumn(aIndex, aValue)) return false;
+            else if (!CheckSubGrid(aIndex, aValue)) return false;
+            else return true;
         }
-
-        //public bool CanSetValue(Point2D aPoint, int Value)
-        //{
-        //    if (!CheckRow(aPoint, Value)) return false;
-        //    if (!CheckColumn(aPoint, Value)) return false;
-        //    if (!CheckSubGrid(aPoint, Value)) return false;
-        //
-        //    return true;
-        //}
 
         public bool Solved()
         {
             return !fGrid.Contains(0);
         }
 
-        public bool CheckRow(Point2D aPoint, int aValue)
+        public bool CheckRow(int aIndex, int aValue)
         {
-            for (int i = 0; i < 9; i++)
+            int lOffset = aIndex / 9 * 9;
+            
+            for (int i = lOffset; i < (9 + lOffset); i++)
             {
-                if (i != aPoint.X && fGrid[(aPoint.Y * 9) + i] == aValue) return false;
+                if (i != aIndex && fGrid[i] == aValue) return false;
             }
 
             return true;
         }
 
-        private bool CheckColumn(Point2D aPoint, int aValue)
+        public bool CheckColumn(int aIndex, int aValue)
         {
-            for (int i = 0; i < 9; i++)
+            for (int i = (aIndex % 9); i < 81; i += 9)
             {
-                if (i != aPoint.Y && fGrid[(i * 9) + aPoint.X] == aValue) return false;
+                if (i != aIndex && fGrid[i] == aValue) return false;
             }
 
             return true;
         }
 
-        public bool CheckSubGrid(Point2D aPoint, int aValue)
+        public bool CheckSubGrid(int aIndex, int aValue)
         {
-            Point2D lUpperLeft = new Point2D((int)Math.Floor((double)aPoint.X / 3) * 3, (int)Math.Floor((double)aPoint.Y / 3) * 3);
+            int lXValue = aIndex % 9;
+            int lYValue = aIndex / 9;
 
-            for (int lX = 0; lX < 3; lX++)
+            int lXStart = lXValue - (lXValue % 3);
+            int lYStart = lYValue - (lYValue % 3);
+
+            for (int lX = lXStart; lX < (3 + lXStart); lX++)
             {
-                for (int lY = 0; lY < 3; lY++)
+                for (int lY = lYStart; lY < (3 + lYStart); lY++)
                 {
-                    if (!(lX == aPoint.X && lY == aPoint.Y) && fGrid[(lY * 9) + lX] == aValue) return false;
+                    int lIndex = (lY * 9) + lX;
+
+                    if (lIndex != aIndex && fGrid[lIndex] == aValue) return false;
                 }
             }
 
             return true;
         }
-
-        //public bool CheckRow(Point2D aPoint, int aValue)
-        //{
-        //    for (int i = 0; i < 9; i++)
-        //    {
-        //        if (i != aPoint.X && fGrid[(aPoint.Y * 9) + i] == aValue) return false;
-        //    }
-        //
-        //    return true;
-        //}
-        //
-        //private bool CheckColumn(Point2D aPoint, int aValue)
-        //{
-        //    for (int i = 0; i < 9; i++)
-        //    {
-        //        if (i != aPoint.Y && fGrid[(i * 9) + aPoint.X] == aValue) return false;
-        //    }
-        //
-        //    return true;
-        //}
-        //
-        //public bool CheckSubGrid(Point2D aPoint, int aValue)
-        //{
-        //    Point2D lUpperLeft = new Point2D((int)Math.Floor((double)aPoint.X / 3) * 3, (int)Math.Floor((double)aPoint.Y / 3) * 3);
-        //
-        //    for (int lX = 0; lX < 3; lX++)
-        //    {
-        //        for (int lY = 0; lY < 3; lY++)
-        //        {
-        //            if (!(lX == aPoint.X && lY == aPoint.Y) && fGrid[(lY * 9) + lX] == aValue) return false;
-        //        }
-        //    }
-        //
-        //    return true;
-        //}
     }
 }
