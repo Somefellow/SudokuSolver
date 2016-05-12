@@ -24,24 +24,43 @@ namespace SudokuSolver
 
         public void Draw()
         {
-            //Console.WriteLine("#---*---*---#");
+            Console.WriteLine("#---*---*---#");
+            int lIndex = 0;
 
-            for (int i = 0; i < fGrid.Length; i++)
+            for (int i = 0; i < 3; ++i)
             {
-                if (fGrid[i] == 0)
+                for (int j = 0; j < 3; ++j)
                 {
-                    Console.Write('.');
-                }
-                else
-                {
-                    Console.Write(fGrid[i]);
+                    for (int k = 0; k < 3; ++k)
+                    {
+                        Console.Write("|");
+                        for (int l = 0; l < 3; ++l)
+                        {
+                            Console.Write(fGrid[lIndex++]);
+                        }
+                    }
+                    Console.WriteLine("|");
                 }
 
-                if ((i + 1) % 9 == 0)
-                {
-                    Console.WriteLine();
-                }
+                Console.WriteLine("#---*---*---#");
             }
+
+//            for (int i = 0; i < fGrid.Length; i++)
+//            {
+//                if (fGrid[i] == 0)
+//                {
+//                    Console.Write('.');
+//                }
+//                else
+//                {
+//                    Console.Write(fGrid[i]);
+//                }
+//
+//                if ((i + 1) % 9 == 0)
+//                {
+//                    Console.WriteLine();
+//                }
+//            }
 
             //Console.WriteLine("#---*---*---#");
         }

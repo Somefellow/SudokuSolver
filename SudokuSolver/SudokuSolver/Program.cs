@@ -1,4 +1,4 @@
-﻿#define EASY
+﻿#define HARD
 
 using System;
 using System.Diagnostics;
@@ -10,7 +10,7 @@ namespace SudokuSolver
         static void Main(string[] args)
         {
 #if EASY
-            string lString = 
+            string lString =
                 "003020600" +
                 "900305001" +
                 "001806400" +
@@ -57,6 +57,7 @@ namespace SudokuSolver
             }
 
             Console.WriteLine("\nTime taken - {0}ms", Timer.ElapsedMilliseconds);
+            Console.WriteLine("{0} moves attempted.", lBT.CheckCount);
             Console.ReadKey();
         }
     }

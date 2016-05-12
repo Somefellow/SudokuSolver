@@ -5,11 +5,18 @@ namespace SudokuSolver
     class Backtrack
     {
         private Stack<Sudoku> fStack;
+        private int fCheckCount;
 
         public Backtrack(Sudoku lInitial)
         {
             fStack = new Stack<Sudoku>();
             fStack.Push(lInitial);
+            fCheckCount = 0;
+        }
+
+        public int CheckCount
+        {
+            get { return fCheckCount; }
         }
 
         public Sudoku Solve()
@@ -42,6 +49,8 @@ namespace SudokuSolver
                         fStack.Push(lMoveSudoku);
                     }
                 }
+
+                fCheckCount++;
             } while (fStack.Count > 0);
 
             return null;
