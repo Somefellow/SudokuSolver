@@ -21,7 +21,7 @@ namespace SudokuSolver
 
         public Sudoku Solve()
         {
-            do
+            while (fStack.Count > 0)
             {
                 Sudoku lSudoku = fStack.Pop();
 
@@ -51,7 +51,7 @@ namespace SudokuSolver
                 }
 
                 fCheckCount++;
-            } while (fStack.Count > 0);
+            }
 
             return null;
         }

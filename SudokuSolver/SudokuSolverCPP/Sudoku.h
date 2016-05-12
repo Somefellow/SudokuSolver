@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #define SIZE 9
 
 class Sudoku
@@ -12,13 +14,12 @@ private:
 	bool CheckSubGrid(int, int);
 public:
 	Sudoku(int[SIZE]);
-	~Sudoku();
 
-	int GetValue(int);
+	int ValueAt(int);
 	void SetValue(int, int);
 
-	bool Solved();
-
-	void CanSetValue(int, int);
+	bool Solved(void);
+	bool CanSetValue(int, int);
+	std::string ToString(void);
 };
 

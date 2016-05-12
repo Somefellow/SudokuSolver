@@ -1,36 +1,27 @@
 #include <iostream>
-#include <bitset>
 
-#define SIZE 10000000
-#define MAX (int)(SIZE - 3) / 2
+#include "Sudoku.h"
+#include "Backtrack.h"
 
-using namespace std;
+#define PUZZLE "003020600900305001001806400008102900700000008006708200002609500800203009005010300"
+#define SOLUTION "812753649943682175675491283154237896369845721287169534521974368438526917796318452"
 
-int primes[MAX + 1];                                                   //array that stores the primes up to sqrt(SIZE)
-bitset<MAX + 1> bset;                                                  //auxiliary bitset used to make the sieve
-
-void setPrimes()
+int main()
 {
-	int i, j;
+	char* EasyPuzzle = PUZZLE;
+	int lGrid[81];
 
-	for (i = 0; (i * i) <= SIZE; i++)                                          //we only have to get primes up to sqrt(SIZE)
-	{
-		if (!bset.test(i))
-		{
-			for (j = i + 1; (2 * j + 1)*(2 * i + 3) <= SIZE; j++)
-			{
-				bset.set(((2 * j + 1)*(2 * i + 3) - 3) / 2);                   //setting all non-primes
-			}
-		}
-	}
+	for (int i = 0; i < 81; ++i)
+		lGrid[i] = EasyPuzzle[i] - '0';
 
-	primes[0] = 2;                                                     //store the first prime (that is 2)
+	Sudoku lSudoku(lGrid);
+	Backtrack lBacktrack(lSudoku);
 
-	for (i = 1, j = 0; j < MAX + 1; j++)
-	{
-		if (!bset.test(j))
-		{
-			primes[i++] = 2 * j + 3;                                        //store the remaining odd primes
-		}
-	}
+	std::string lOutput = lBacktrack.Solve();
+	std::cout << lOutput << std::endl;
+
+	if (lOutput.compare(SOLUTION))
+		std::cout << "UnitTest Passed" << std::endl;
+
+	return 0;
 }

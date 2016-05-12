@@ -24,7 +24,7 @@ namespace SudokuSolver
 
         public void Draw()
         {
-            Console.WriteLine("#---*---*---#");
+            Console.WriteLine("#-----------#");
             int lIndex = 0;
 
             for (int i = 0; i < 3; ++i)
@@ -36,33 +36,42 @@ namespace SudokuSolver
                         Console.Write("|");
                         for (int l = 0; l < 3; ++l)
                         {
-                            Console.Write(fGrid[lIndex++]);
+                            int Value = fGrid[lIndex++];
+
+                            if (Value == 0)
+                            {
+                                Console.Write(' ');
+                            }
+                            else
+                            {
+                                Console.Write(Value.ToString());
+                            }
                         }
                     }
                     Console.WriteLine("|");
                 }
 
-                Console.WriteLine("#---*---*---#");
+                if (i < 2)
+                {
+                    Console.WriteLine("|---+---+---|");
+                }
+                else
+                {
+                    Console.WriteLine("#-----------#");
+                }
+            }
+        }
+
+        public override string ToString()
+        {
+            string result = string.Empty;
+
+            for (int i = 0; i < 81; i++)
+            {
+                result += fGrid[i].ToString();
             }
 
-//            for (int i = 0; i < fGrid.Length; i++)
-//            {
-//                if (fGrid[i] == 0)
-//                {
-//                    Console.Write('.');
-//                }
-//                else
-//                {
-//                    Console.Write(fGrid[i]);
-//                }
-//
-//                if ((i + 1) % 9 == 0)
-//                {
-//                    Console.WriteLine();
-//                }
-//            }
-
-            //Console.WriteLine("#---*---*---#");
+            return result;
         }
 
         public int ValueAt(int aIndex)

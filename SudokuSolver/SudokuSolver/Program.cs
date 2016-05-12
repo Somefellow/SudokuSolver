@@ -1,4 +1,4 @@
-﻿#define HARD
+﻿#define EASY
 
 using System;
 using System.Diagnostics;
@@ -54,10 +54,14 @@ namespace SudokuSolver
             else
             {
                 lSudoku.Draw();
+
+                Console.WriteLine(lSudoku.ToString());
             }
 
             Console.WriteLine("\nTime taken - {0}ms", Timer.ElapsedMilliseconds);
             Console.WriteLine("{0} moves attempted.", lBT.CheckCount);
+
+            Console.WriteLine(lSudoku.ToString());
             Console.ReadKey();
         }
     }
