@@ -10,7 +10,7 @@ namespace SudokuSolver
         public Sudoku(string lString)
         {
             fGrid = new int[lString.Length];
-            
+
             for (int i = 0; i < lString.Length; i++)
             {
                 fGrid[i] = lString[i] - '0';
@@ -24,6 +24,8 @@ namespace SudokuSolver
 
         public void Draw()
         {
+            //Console.WriteLine("#---*---*---#");
+
             for (int i = 0; i < fGrid.Length; i++)
             {
                 if (fGrid[i] == 0)
@@ -40,6 +42,8 @@ namespace SudokuSolver
                     Console.WriteLine();
                 }
             }
+
+            //Console.WriteLine("#---*---*---#");
         }
 
         public int ValueAt(int aIndex)
@@ -68,10 +72,10 @@ namespace SudokuSolver
         public bool CheckRow(int aIndex, int aValue)
         {
             int lOffset = aIndex / 9 * 9;
-            
+
             for (int i = lOffset; i < (9 + lOffset); i++)
             {
-                if (i != aIndex && fGrid[i] == aValue) return false;
+                if (fGrid[i] == aValue) return false;
             }
 
             return true;
@@ -81,7 +85,7 @@ namespace SudokuSolver
         {
             for (int i = (aIndex % 9); i < 81; i += 9)
             {
-                if (i != aIndex && fGrid[i] == aValue) return false;
+                if (fGrid[i] == aValue) return false;
             }
 
             return true;
@@ -99,9 +103,7 @@ namespace SudokuSolver
             {
                 for (int lY = lYStart; lY < (3 + lYStart); lY++)
                 {
-                    int lIndex = (lY * 9) + lX;
-
-                    if (lIndex != aIndex && fGrid[lIndex] == aValue) return false;
+                    if (fGrid[(lY * 9) + lX] == aValue) return false;
                 }
             }
 

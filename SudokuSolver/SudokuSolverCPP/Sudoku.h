@@ -1,22 +1,24 @@
 #pragma once
+
+#define SIZE 9
+
 class Sudoku
 {
 private:
-	int fGrid[81];
+	int fGrid[SIZE];
 
 	bool CheckRow(int, int);
 	bool CheckColumn(int, int);
 	bool CheckSubGrid(int, int);
 public:
-	Sudoku(int[81]);
-	Sudoku(const Sudoku& aSudoku);
+	Sudoku(int[SIZE]);
 	~Sudoku();
 
 	int GetValue(int);
 	void SetValue(int, int);
 
 	bool Solved();
-	
+
 	void CanSetValue(int, int);
 };
 

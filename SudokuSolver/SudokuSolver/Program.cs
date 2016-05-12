@@ -1,4 +1,4 @@
-﻿#define HARD
+﻿#define EASY
 
 using System;
 using System.Diagnostics;
