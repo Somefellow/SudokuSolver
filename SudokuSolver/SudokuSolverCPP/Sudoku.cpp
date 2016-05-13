@@ -2,9 +2,9 @@
 
 bool Sudoku::CheckRow(int aIndex, int aValue)
 {
-	int lOffset = aIndex / 9 * 9;
+	int lOffset = aIndex / SIZE * SIZE;
 
-	for (int i = lOffset; i < (9 + lOffset); i++)
+	for (int i = lOffset; i < (SIZE + lOffset); i++)
 	{
 		if (fGrid[i] == aValue) return false;
 	}
@@ -14,7 +14,7 @@ bool Sudoku::CheckRow(int aIndex, int aValue)
 
 bool Sudoku::CheckColumn(int aIndex, int aValue)
 {
-	for (int i = (aIndex % 9); i < 81; i += 9)
+	for (int i = (aIndex % SIZE); i < (SIZE * SIZE); i += SIZE)
 	{
 		if (fGrid[i] == aValue) return false;
 	}
@@ -24,17 +24,17 @@ bool Sudoku::CheckColumn(int aIndex, int aValue)
 
 bool Sudoku::CheckSubGrid(int aIndex, int aValue)
 {
-	int lXValue = aIndex % 9;
-	int lYValue = aIndex / 9;
+	int lXValue = aIndex % SIZE;
+	int lYValue = aIndex / SIZE;
 
-	int lXStart = lXValue - (lXValue % 3);
-	int lYStart = lYValue - (lYValue % 3);
+	int lXStart = lXValue - (lXValue % (SIZE / SIZE));
+	int lYStart = lYValue - (lYValue % (SIZE / SIZE));
 
-	for (int lX = lXStart; lX < (3 + lXStart); lX++)
+	for (int lX = lXStart; lX < ((SIZE / SIZE) + lXStart); lX++)
 	{
-		for (int lY = lYStart; lY < (3 + lYStart); lY++)
+		for (int lY = lYStart; lY < ((SIZE / SIZE) + lYStart); lY++)
 		{
-			if (fGrid[(lY * 9) + lX] == aValue) return false;
+			if (fGrid[(lY * SIZE) + lX] == aValue) return false;
 		}
 	}
 

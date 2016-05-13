@@ -20,7 +20,7 @@ std::string Backtrack::Solve(void)
 
 		int lBlankIndex;
 
-		for (lBlankIndex = 0; lBlankIndex < 81; lBlankIndex++)
+		for (lBlankIndex = 0; lBlankIndex < (SIZE * SIZE); lBlankIndex++)
 		{
 			if (lSudoku.ValueAt(lBlankIndex) == 0)
 			{
@@ -28,7 +28,7 @@ std::string Backtrack::Solve(void)
 			}
 		}
 
-		for (int i = 9; i > 0; i--)
+		for (int i = SIZE; i > 0; i--)
 		{
 			if (lSudoku.CanSetValue(lBlankIndex, i))
 			{
