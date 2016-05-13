@@ -41,9 +41,9 @@ bool Sudoku::CheckSubGrid(int aIndex, int aValue)
 	return true;
 }
 
-Sudoku::Sudoku(int aGrid[SIZE])
+Sudoku::Sudoku(int aGrid[SIZE * SIZE])
 {
-	for (int i = 0; i < SIZE; ++i)
+	for (int i = 0; i < (SIZE * SIZE); ++i)
 	{
 		fGrid[i] = aGrid[i];
 	}
@@ -61,7 +61,7 @@ void Sudoku::SetValue(int aIndex, int aValue)
 
 bool Sudoku::Solved(void)
 {
-	for (int i = 0; i < SIZE; i++)
+	for (int i = 0; i < (SIZE * SIZE); i++)
 	{
 		if (fGrid[i] == 0) return false;
 	}
@@ -79,7 +79,7 @@ bool Sudoku::CanSetValue(int aIndex, int aValue)
 
 std::string Sudoku::ToString(void)
 {
-	std::string result;
+	std::string result = "";
 
 	for (int i = 0; i < (SIZE * SIZE); ++i)
 	{

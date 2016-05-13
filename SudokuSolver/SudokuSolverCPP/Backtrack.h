@@ -1,10 +1,7 @@
 #pragma once
 
 #include <stack>
-#include <string>
-
 #include "Sudoku.h"
-
 
 class Backtrack
 {

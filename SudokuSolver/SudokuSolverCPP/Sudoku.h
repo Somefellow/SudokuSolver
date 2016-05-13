@@ -7,13 +7,13 @@
 class Sudoku
 {
 private:
-	int fGrid[SIZE];
+	int fGrid[SIZE * SIZE];
 
 	bool CheckRow(int, int);
 	bool CheckColumn(int, int);
 	bool CheckSubGrid(int, int);
 public:
-	Sudoku(int[SIZE]);
+	Sudoku(int[SIZE * SIZE]);
 
 	int ValueAt(int);
 	void SetValue(int, int);
